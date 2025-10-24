@@ -1,0 +1,27 @@
+name: Release Broom Crypto Wasm
+
+on:
+    push:
+        tags:
+            - "v*"
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        permissions: # <--- ADD THIS BLOCK HERE
+            contents: write
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Create release folder
+              run: mkdir -p release
+
+            - name: Build Node
+              run: |
+                  GOOS=js GOARCH=wasm go build -o ../release/broom-crypto.wasm .
+
+            - name: Release
+              uses: softprops/action-gh-release@v1
+              with:
+                  files: release/*
+                  token: ${{ secrets.GITHUB_TOKEN }}

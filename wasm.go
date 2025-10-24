@@ -22,3 +22,12 @@ func wasmGetSignature(this js.Value, args []js.Value) any {
 	js.CopyBytesToGo(data, jsData)
 	return Generic_GetSignature(privateKey.String(), data)
 }
+
+func wasmHashArgon(this js.Value, args []js.Value) any {
+	jsData := args[1]
+	data := make([]byte, jsData.Get("length").Int())
+
+	js.CopyBytesToGo(data, jsData)
+
+	return Generic_HashArgon(data)
+}
