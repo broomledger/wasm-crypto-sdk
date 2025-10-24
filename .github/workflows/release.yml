@@ -21,7 +21,7 @@ jobs:
                   GOOS=js GOARCH=wasm go build -o release/broom-crypto.wasm .
             - name: Copy wasm_exec.js
               run: |
-                  cp "$(go env GOROOT)/misc/wasm/wasm_exec.js" release/
+                  cp "$(go env GOROOT)/lib/wasm/wasm_exec.js" release/
 
             - name: Release
               uses: softprops/action-gh-release@v1
