@@ -18,7 +18,7 @@ jobs:
 
             - name: Build Node
               run: |
-                  GOOS=js GOARCH=wasm go build -o ../release/broom-crypto.wasm .
+                  GOOS=js GOARCH=wasm go build -o release/broom-crypto.wasm .
 
             - name: Release
               uses: softprops/action-gh-release@v1
