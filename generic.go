@@ -7,8 +7,10 @@ import (
 	"crypto/ecdsa"
 	"crypto/elliptic"
 	"crypto/rand"
+	"encoding/json"
 
 	nodecrypto "github.com/canavan-a/broom/node/crypto"
+	netnode "github.com/canavan-a/broom/node/netnode"
 )
 
 func Generic_GenerateKeypair() any {
@@ -46,4 +48,27 @@ func Generic_HashArgon(data []byte) any {
 
 	output["hash"] = hash
 	return output
+}
+
+func Gereneric_GetTransactionSig(privateKey string, stringifiedTxn string) any {
+
+	output := make(map[string]any)
+	var txn netnode.Transaction
+
+	err := json.Unmarshal([]byte(stringifiedTxn), &txn)
+	if err != nil {
+		output["error"] = err.Error()
+		return output
+	}
+
+	err = txn.Sign(privateKey)
+	if err != nil {
+		output["error"] = err.Error()
+		return output
+	}
+
+	output["sig"] = txn.Sig
+
+	return output
+
 }

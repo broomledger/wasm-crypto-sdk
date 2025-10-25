@@ -15,6 +15,7 @@ func main() {
 	js.Global().Set("wasmGenerateKeypair", js.FuncOf(wasmGenerateKeypair))
 	js.Global().Set("wasmGetSignature", js.FuncOf(wasmGetSignature))
 	js.Global().Set("wasmHashArgon", js.FuncOf(wasmHashArgon))
+	js.Global().Set("wasmGetTransactionSig", js.FuncOf(wasmGetTransactionSig))
 
 	select {}
 }

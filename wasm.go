@@ -31,3 +31,11 @@ func wasmHashArgon(this js.Value, args []js.Value) any {
 
 	return Generic_HashArgon(data)
 }
+
+func wasmGetTransactionSig(this js.Value, args []js.Value) any {
+	privateKey := args[0]
+	stringifiedData := args[1]
+
+	return Gereneric_GetTransactionSig(privateKey.String(), stringifiedData.String())
+
+}
